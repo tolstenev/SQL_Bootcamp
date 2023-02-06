@@ -8,6 +8,6 @@ ORDER BY rating DESC
 SELECT name, rating
 FROM pizzeria
 WHERE rating
-          BETWEEN 3.5 AND 5.0
+    BETWEEN 3.5 AND 5.0
 ORDER BY rating DESC
 ;

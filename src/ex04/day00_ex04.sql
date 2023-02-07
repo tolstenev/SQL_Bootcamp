@@ -1,3 +1,3 @@
-SELECT CONCAT(name, $$ (age:$$, age, $$,gender:'$$, gender, $$',address:'$$, address, $$')$$)
+SELECT name || $$ (age:$$ || age || $$,gender:'$$ || gender || $$'$$ || $$,adress:'$$ || address || $$')$$ AS person_information
 FROM person
-ORDER BY name;
+ORDER BY person_information;

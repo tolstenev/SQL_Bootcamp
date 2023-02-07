@@ -1,7 +1,7 @@
-SELECT order_date, person_id
+SELECT order_date AS action_date, person_id
 FROM person_order
 UNION
-SELECT visit_date, person_id
+SELECT visit_date AS action_date, person_id
 FROM person_visits
-ORDER BY order_date, person_id DESC
+ORDER BY action_date, person_id DESC
 ;

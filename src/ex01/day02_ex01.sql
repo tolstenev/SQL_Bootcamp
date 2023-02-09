@@ -1,5 +1,5 @@
 SELECT missing_date::date
-FROM GENERATE_SERIES('2022-01-01'::date, '2022-01-10'::date, '1 day') missing_date
+FROM GENERATE_SERIES('2022-01-01'::date, '2022-01-10'::date, '1 day'::interval) missing_date
          LEFT JOIN (SELECT visit_date
                     FROM person_visits
                     WHERE person_id = 1

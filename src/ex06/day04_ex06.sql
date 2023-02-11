@@ -1,6 +1,6 @@
 CREATE MATERIALIZED VIEW mv_dmitriy_visits_and_eats
 AS
-    SELECT piz.name AS pizzeria_name, visit_date
+    SELECT piz.name AS pizzeria_name
     FROM person AS p
              JOIN person_visits pv ON p.id = pv.person_id
              JOIN pizzeria piz ON pv.pizzeria_id = piz.id

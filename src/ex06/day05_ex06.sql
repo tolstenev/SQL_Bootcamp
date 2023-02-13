@@ -1,4 +1,6 @@
-CREATE INDEX idx_1 ON pizzeria USING btree (id, rating);
+CREATE INDEX idx_1 ON pizzeria USING btree (rating);
+
+SET ENABLE_SEQSCAN = OFF;
 
 EXPLAIN ANALYZE
 SELECT

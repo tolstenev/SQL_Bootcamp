@@ -1,4 +1,4 @@
-SELECT name, COUNT(*) AS count_of_orders, round(avg(price), 2) as average_price, max(price) as max_price
+SELECT name, COUNT(*) AS count_of_orders, round(avg(price), 2) as average_price, max(price) as max_price, min(price) as min_price
 from person_order po
 JOIN menu m ON m.id = po.menu_id
 JOIN pizzeria p ON p.id = m.pizzeria_id

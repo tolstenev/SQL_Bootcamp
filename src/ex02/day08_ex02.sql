@@ -1,22 +1,26 @@
 -- Session #1
 BEGIN TRANSACTION;
 -- BEGIN
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- SET
 
 -- Session #2
 BEGIN TRANSACTION;
 -- BEGIN
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- SET
 
 -- Session #1
 SELECT * FROM pizzeria WHERE name = 'Pizza Hut';
---  id |   name    | rating 
+--  id |   name    | rating
 -- ----+-----------+--------
---   1 | Pizza Hut |      5
+--   1 | Pizza Hut |    3.6
 
 -- Session #2
 SELECT * FROM pizzeria WHERE name = 'Pizza Hut';
 --  id |   name    | rating
 -- ----+-----------+--------
---   1 | Pizza Hut |      5
+--   1 | Pizza Hut |    3.6
 
 -- Session #1
 UPDATE pizzeria SET rating = 4 WHERE name = 'Pizza Hut';
@@ -25,32 +29,26 @@ UPDATE pizzeria SET rating = 4 WHERE name = 'Pizza Hut';
 -- Session #2
 UPDATE pizzeria SET rating = 3.6 WHERE name = 'Pizza Hut';
 ------------Lost Update Anomaly is here------------------
+-- ERROR:  could not serialize access due to concurrent update
 
 -- Session #1
 COMMIT;
 -- COMMIT
-
--- Session #2
--- UPDATE 1
-
--- Session #1
 SELECT * FROM pizzeria WHERE name = 'Pizza Hut';
---  id |   name    | rating 
+--  id |   name    | rating
 -- ----+-----------+--------
 --   1 | Pizza Hut |      4
 
 -- Session #2
-COMMIT;
--- COMMIT
-
--- Session #1
 SELECT * FROM pizzeria WHERE name = 'Pizza Hut';
---  id |   name    | rating
--- ----+-----------+--------
---   1 | Pizza Hut |    3.6
+-- ERROR:  current transaction is aborted, commands ignored until end of transaction block
+
+-- Session #2
+COMMIT;
+-- ROLLBACK
 
 -- Session #2
 SELECT * FROM pizzeria WHERE name = 'Pizza Hut';
---  id |   name    | rating 
+--  id |   name    | rating
 -- ----+-----------+--------
---   1 | Pizza Hut |    3.6
+--   1 | Pizza Hut |      4

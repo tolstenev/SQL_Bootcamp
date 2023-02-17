@@ -28,7 +28,6 @@ UPDATE pizzeria SET rating = 4 WHERE name = 'Pizza Hut';
 
 -- Session #2
 UPDATE pizzeria SET rating = 3.6 WHERE name = 'Pizza Hut';
-------------Lost Update Anomaly is here------------------
 -- ERROR:  could not serialize access due to concurrent update
 
 -- Session #1

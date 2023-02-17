@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS person_audit;
-
 CREATE TABLE person_audit
 (
     created    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -12,8 +10,6 @@ CREATE TABLE person_audit
 
         CONSTRAINT ch_type_event CHECK ( type_event IN ('I', 'U', 'D') )
 );
-
-DROP TRIGGER IF EXISTS trg_person_insert_audit ON person_audit;
 
 CREATE OR REPLACE FUNCTION fnc_trg_person_insert_audit() RETURNS TRIGGER
     AS $$BEGIN

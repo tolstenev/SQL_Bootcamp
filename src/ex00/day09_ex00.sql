@@ -24,10 +24,5 @@ CREATE TRIGGER trg_person_insert_audit
     FOR EACH ROW
     EXECUTE FUNCTION fnc_trg_person_insert_audit();
 
-INSERT INTO person_audit (row_id, name, age, gender, address)
-SELECT id, name, age, gender, address
-FROM person
-ORDER BY id;
-
--- SQL-Statement for check
--- INSERT INTO person(id, name, age, gender, address) VALUES (10,'Damir', 22, 'male', 'Irkutsk');
+-- -- SQL-Statement for check
+INSERT INTO person(id, name, age, gender, address) VALUES (10,'Damir', 22, 'male', 'Irkutsk');

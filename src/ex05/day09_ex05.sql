@@ -1,7 +1,7 @@
 DROP FUNCTION fnc_persons_male CASCADE;
 DROP FUNCTION fnc_persons_female CASCADE;
 
-CREATE OR REPLACE FUNCTION fnc_persons(pgender varchar DEFAULT 'female')
+CREATE OR REPLACE FUNCTION fnc_persons(IN pgender varchar DEFAULT 'female')
        RETURNS TABLE (id      bigint,
                       name    varchar,
                       age     integer,

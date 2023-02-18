@@ -16,8 +16,8 @@ CREATE OR REPLACE FUNCTION fnc_trg_person_audit() RETURNS TRIGGER AS $$
             RETURN OLD;
         ELSIF (TG_OP = 'UPDATE') THEN
             INSERT INTO person_audit (created, type_event, row_id, name, age, gender, address)
-            VALUES (NOW(), 'U', NEW."id", NEW."name", NEW."age", NEW."gender", NEW."address");
-            RETURN NEW;
+            VALUES (NOW(), 'U', OLD.id, OLD.name, OLD.age, OLD.gender, OLD.address);
+            RETURN OLD;
         ELSIF (TG_OP = 'INSERT') THEN
             INSERT INTO person_audit (created, type_event, row_id, name, age, gender, address)
             VALUES (NOW(), 'I', NEW."id", NEW."name", NEW."age", NEW."gender", NEW."address");

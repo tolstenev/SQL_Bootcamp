@@ -11,5 +11,6 @@ CREATE TRIGGER trg_person_delete_audit
     FOR EACH ROW
     EXECUTE FUNCTION fnc_trg_person_delete_audit();
 
--- -- SQL-Statement for check
+
+-- SQL-Statement for check
 DELETE FROM person WHERE id = 10;

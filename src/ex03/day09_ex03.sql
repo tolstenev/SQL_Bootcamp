@@ -30,7 +30,8 @@ CREATE TRIGGER trg_person_audit
 AFTER INSERT OR UPDATE OR DELETE ON person
     FOR EACH ROW EXECUTE FUNCTION fnc_trg_person_audit();
 
--- -- SQL-Statements for check
+
+-- SQL-Statements for check
 INSERT INTO person(id, name, age, gender, address)
 VALUES (10, 'Damir', 22, 'male', 'Irkutsk');
 

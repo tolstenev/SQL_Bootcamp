@@ -14,7 +14,7 @@ CREATE TABLE person_audit
 CREATE OR REPLACE FUNCTION fnc_trg_person_insert_audit() RETURNS TRIGGER
     AS $$BEGIN
         INSERT INTO person_audit (created, type_event, row_id, name, age, gender, address)
-        VALUES (NOW(), 'I', NEW.id, NEW.name, NEW.age, NEW.gender, NEW.address);
+        VALUES (CURRENT_TIMESTAMP, 'I', NEW.id, NEW.name, NEW.age, NEW.gender, NEW.address);
         RETURN NEW;
     END;
     $$ LANGUAGE plpgsql;

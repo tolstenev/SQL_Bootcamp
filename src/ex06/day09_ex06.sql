@@ -3,8 +3,8 @@ CREATE OR REPLACE FUNCTION fnc_person_visits_and_eats_on_date(pperson varchar DE
                                                               pdate date DEFAULT '2022-01-08')
        RETURNS TABLE (piz_name varchar)
    AS $$BEGIN
-
-        WITH visits AS (
+        RETURN QUERY
+        (WITH visits AS (
                 SELECT p.name     AS person_name,
                        visit_date AS date,
                        piz.name   AS pizzeria_name
@@ -21,7 +21,7 @@ CREATE OR REPLACE FUNCTION fnc_person_visits_and_eats_on_date(pperson varchar DE
                          JOIN menu m ON m.id = pv.menu_id
                          JOIN pizzeria piz ON piz.id = m.pizzeria_id)
 
-        SELECT vo.pizzeria_name
+        SELECT DISTINCT vo.pizzeria_name
         FROM (
               SELECT person_name, date, pizzeria_name
               FROM visits
@@ -36,14 +36,14 @@ CREATE OR REPLACE FUNCTION fnc_person_visits_and_eats_on_date(pperson varchar DE
                                   o.date          = vo.date          AND
                                   o.pizzeria_name = vo.pizzeria_name
        WHERE vo.person_name = pperson AND
-             price          = pprice AND
-             vo.date        = pdate;
+             price          < pprice AND
+             vo.date        = pdate);
 
        END;
     $$ LANGUAGE plpgsql;
 
 
--- SQL-Statements for check
+-- -- SQL-Statements for check
 select *
 from fnc_person_visits_and_eats_on_date(pprice := 800);
 
